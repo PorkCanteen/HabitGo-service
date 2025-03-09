@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: HabitGo-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/habit-go?serverTimezone=GMT%2b8 # ????
+    username: root
+    password: 553295cmq
