@@ -23,4 +23,14 @@ public class TaskService implements ITaskService {
     public void addTask(Task task) {
         taskMapper.addTask(task);
     }
+
+    @Override
+    public void updateTask(Task task) {
+        taskMapper.updateTask(task);
+    }
+
+    @Override
+    public void deleteTask(int id) {
+        taskMapper.deleteTask(id);
+    }
 }

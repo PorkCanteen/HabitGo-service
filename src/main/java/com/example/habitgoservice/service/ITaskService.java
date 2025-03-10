@@ -10,4 +10,8 @@ ITaskService {
     List<Task> listTask();
 
     void addTask(Task task);
+
+    void updateTask(Task task);
+
+    void deleteTask(int id);
 }
