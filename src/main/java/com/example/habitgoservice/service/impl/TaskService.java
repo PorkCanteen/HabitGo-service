@@ -18,4 +18,9 @@ public class TaskService implements ITaskService {
     public List<Task> listTask() {
         return taskMapper.listTask();
     }
+
+    @Override
+    public void addTask(Task task) {
+        taskMapper.addTask(task);
+    }
 }
