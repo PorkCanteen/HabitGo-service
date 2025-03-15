@@ -1,8 +1,10 @@
 package com.example.habitgoservice.service.impl;
 
+import com.example.habitgoservice.common.Result;
 import com.example.habitgoservice.controller.dto.LoginDTO;
 import com.example.habitgoservice.controller.request.LoginRequest;
 import com.example.habitgoservice.entity.User;
+import com.example.habitgoservice.exception.ServiceException;
 import com.example.habitgoservice.mapper.UserMapper;
 import com.example.habitgoservice.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,14 +29,12 @@ public class UserService implements IUserService {
     @Override
     public LoginDTO login(LoginRequest request) {
         LoginDTO loginDTO = null;
-        try {
-            User user = userMapper.getByUserNameAndPassword(request);
-            loginDTO = new LoginDTO();
-            BeanUtils.copyProperties(user, loginDTO);
-            return loginDTO;
-        } catch (Exception e) {
-            log.error("登录失败", e);
-            return null;
+        User user = userMapper.getByUserNameAndPassword(request);
+        if(user == null) {
+            throw new ServiceException("用户名或密码错误");
         }
+        loginDTO = new LoginDTO();
+        BeanUtils.copyProperties(user, loginDTO);
+        return loginDTO;
     }
 }

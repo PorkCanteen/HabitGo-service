@@ -23,9 +23,6 @@ public class UserController {
     @PostMapping("/login")
     public Result login(@RequestBody LoginRequest request) {
         LoginDTO login = userService.login(request);
-        if(login == null){
-            return Result.error("用户名或密码错误");
-        }
         return Result.success(login);
     }
 }

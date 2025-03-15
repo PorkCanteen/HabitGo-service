@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class Result {
 
-    private static final String SUCCESS_CODE = "0";
-    private static final String ERROR_CODE = "1001";
+    private static final String SUCCESS_CODE = "200";
+    private static final String ERROR_CODE = "500";
 
     private String code; // 状态码
     private String message; // 信息
