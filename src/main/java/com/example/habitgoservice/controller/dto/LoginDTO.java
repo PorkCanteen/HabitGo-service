@@ -1,12 +1,10 @@
-package com.example.habitgoservice.entity;
+package com.example.habitgoservice.controller.dto;
 
 import lombok.Data;
 
 @Data
-public class User {
-    private int id;
+public class LoginDTO {
     private String username;
     private String email;
-    private String password;
     private String nickname;
 }
