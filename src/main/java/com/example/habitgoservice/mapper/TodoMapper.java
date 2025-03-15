@@ -21,7 +21,7 @@ public interface TodoMapper {
             + "name = #{name}, "
             + "description = #{description}, "
             + "finishDate = #{finishDate}, "
-            + "isFinished = #{isFinished}, "
+            + "isFinished = #{isFinished} "
             + "WHERE id = #{id}")
     int updateTodo(Todo todo);
 
