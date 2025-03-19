@@ -9,4 +9,5 @@ public class Todo {
     private String description;
     private String finishDate;
     private int isFinished;
+    private int type;
 }

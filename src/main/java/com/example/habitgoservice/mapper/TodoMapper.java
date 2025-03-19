@@ -12,7 +12,7 @@ public interface TodoMapper {
     List<Todo> listTodo();
 
     // 创建
-    @Insert("insert into todo(id, name, description, finishDate, isFinished) values(#{id}, #{name}, #{description}, #{finishDate}, #{isFinished})")
+    @Insert("insert into todo(id, name, description, finishDate, isFinished, type) values(#{id}, #{name}, #{description}, #{finishDate}, #{isFinished}, #{type})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void addTodo(Todo todo);
 
@@ -21,7 +21,8 @@ public interface TodoMapper {
             + "name = #{name}, "
             + "description = #{description}, "
             + "finishDate = #{finishDate}, "
-            + "isFinished = #{isFinished} "
+            + "isFinished = #{isFinished}, "
+            + "type = #{type} "
             + "WHERE id = #{id}")
     int updateTodo(Todo todo);
 
