@@ -44,4 +44,11 @@ public class TaskController {
         taskService.deleteTask(id);
         return Result.success("删除成功");
     }
+
+    // 切换任务状态
+    @PutMapping("/toggle/{id}")
+    public Result toggleTaskStatus(@PathVariable int id) {
+        taskService.toggleTaskStatus(id);
+        return Result.success("状态切换成功");
+    }
 }

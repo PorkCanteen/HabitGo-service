@@ -14,4 +14,10 @@ ITaskService {
     void updateTask(Task task);
 
     void deleteTask(int id);
+
+    /**
+     * 切换任务状态
+     * @param id 任务ID
+     */
+    void toggleTaskStatus(int id);
 }

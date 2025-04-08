@@ -31,4 +31,11 @@ public interface TaskMapper {
     // 删除功能
     @Delete("DELETE FROM task WHERE id = #{id}")
     int deleteTask(@Param("id") int id); // 使用@Param明确参数名
+
+    // 切换任务状态
+    @Update("UPDATE task SET "
+            + "isCompleted = CASE WHEN isCompleted = 1 THEN 0 ELSE 1 END, "
+            + "count = CASE WHEN isCompleted = 0 THEN count - 1 ELSE count + 1 END "
+            + "WHERE id = #{id}")
+    int toggleTaskStatus(@Param("id") int id);
 }

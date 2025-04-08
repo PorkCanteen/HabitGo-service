@@ -33,4 +33,12 @@ public class TaskService implements ITaskService {
     public void deleteTask(int id) {
         taskMapper.deleteTask(id);
     }
+
+    @Override
+    public void toggleTaskStatus(int id) {
+        int result = taskMapper.toggleTaskStatus(id);
+        if (result == 0) {
+            throw new RuntimeException("任务不存在或更新失败");
+        }
+    }
 }
