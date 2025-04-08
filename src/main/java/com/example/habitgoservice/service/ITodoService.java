@@ -14,4 +14,6 @@ ITodoService {
     void updateTodo(Todo todo);
 
     void deleteTodo(int id);
+
+    void toggleComplete(int id);
 }

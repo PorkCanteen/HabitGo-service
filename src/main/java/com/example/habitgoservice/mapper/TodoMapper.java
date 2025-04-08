@@ -29,4 +29,8 @@ public interface TodoMapper {
     // 删除功能
     @Delete("DELETE FROM todo WHERE id = #{id}")
     int deleteTodo(@Param("id") int id); // 使用@Param明确参数名
+
+    // 切换完成状态
+    @Update("UPDATE todo SET isFinished = NOT isFinished WHERE id = #{id}")
+    int toggleComplete(@Param("id") int id);
 }

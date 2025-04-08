@@ -44,4 +44,12 @@ public class TodoController {
         todoService.deleteTodo(id);
         return Result.success("删除成功");
     }
+
+    // 完成待办
+    @PutMapping("/complete/{id}")
+    public Result completeTodo(@PathVariable int id) {
+        todoService.toggleComplete(id);
+        return Result.success("操作成功");
+    }
+
 }

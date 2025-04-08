@@ -33,4 +33,10 @@ public class TodoService implements ITodoService {
     public void deleteTodo(int id) {
         todoMapper.deleteTodo(id);
     }
+
+    @Override
+    public void toggleComplete(int id) {
+        todoMapper.toggleComplete(id);
+    }
 }
+
