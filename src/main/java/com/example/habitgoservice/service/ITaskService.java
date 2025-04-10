@@ -20,4 +20,9 @@ ITaskService {
      * @param id 任务ID
      */
     void toggleTaskStatus(int id);
+
+    /**
+     * 重置所有任务状态
+     */
+    void resetAllTaskStatus();
 }

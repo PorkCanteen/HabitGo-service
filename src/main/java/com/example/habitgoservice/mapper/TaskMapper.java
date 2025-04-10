@@ -38,4 +38,8 @@ public interface TaskMapper {
             + "count = CASE WHEN isCompleted = 0 THEN count - 1 ELSE count + 1 END "
             + "WHERE id = #{id}")
     int toggleTaskStatus(@Param("id") int id);
+
+    // 重置所有任务状态
+    @Update("UPDATE task SET isCompleted = 0")
+    int resetAllTaskStatus();
 }

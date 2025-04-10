@@ -41,4 +41,9 @@ public class TaskService implements ITaskService {
             throw new RuntimeException("任务不存在或更新失败");
         }
     }
+
+    @Override
+    public void resetAllTaskStatus() {
+        taskMapper.resetAllTaskStatus();
+    }
 }
