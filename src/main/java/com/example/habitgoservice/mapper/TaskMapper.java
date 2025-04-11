@@ -42,4 +42,12 @@ public interface TaskMapper {
     // 重置所有任务状态
     @Update("UPDATE task SET isCompleted = 0")
     int resetAllTaskStatus();
+
+    // 获取所有已完成的任务
+    @Select("SELECT * FROM task WHERE iscompleted = 1")
+    List<Task> getCompletedTasks();
+
+    // 更新任务的完成日期
+    @Update("UPDATE task SET completeddates = #{completedDates} WHERE id = #{id}")
+    void updateCompletedDates(Task task);
 }
