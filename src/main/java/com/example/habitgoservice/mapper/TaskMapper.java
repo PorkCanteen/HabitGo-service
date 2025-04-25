@@ -12,7 +12,8 @@ public interface TaskMapper {
     List<Task> listTask();
 
     // 创建
-    @Insert("insert into task(id, name, description, count, isCompleted, taskType, targetType, targetCount) values(#{id}, #{name}, #{description}, #{count}, #{isCompleted}, #{taskType}, #{targetType}, #{targetCount})")
+    @Insert("insert into task(id, name, description, count, isCompleted, taskType, targetType, targetCount, createTime, updateTime) " +
+            "values(#{id}, #{name}, #{description}, #{count}, #{isCompleted}, #{taskType}, #{targetType}, #{targetCount}, #{createTime}, #{updateTime})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void addTask(Task task);
 
@@ -24,7 +25,8 @@ public interface TaskMapper {
             + "isCompleted = #{isCompleted}, "
             + "taskType = #{taskType}, "
             + "targetType = #{targetType}, "
-            + "targetCount = #{targetCount} "
+            + "targetCount = #{targetCount}, "
+            + "updateTime = #{updateTime} "
             + "WHERE id = #{id}")
     int updateTask(Task task);
 
@@ -35,12 +37,13 @@ public interface TaskMapper {
     // 切换任务状态
     @Update("UPDATE task SET "
             + "isCompleted = CASE WHEN isCompleted = 1 THEN 0 ELSE 1 END, "
-            + "count = CASE WHEN isCompleted = 0 THEN count - 1 ELSE count + 1 END "
+            + "count = CASE WHEN isCompleted = 0 THEN count - 1 ELSE count + 1 END, "
+            + "updateTime = NOW() "
             + "WHERE id = #{id}")
     int toggleTaskStatus(@Param("id") int id);
 
     // 重置所有任务状态
-    @Update("UPDATE task SET isCompleted = 0")
+    @Update("UPDATE task SET isCompleted = 0, updateTime = NOW()")
     int resetAllTaskStatus();
 
     // 获取所有已完成的任务
@@ -48,6 +51,6 @@ public interface TaskMapper {
     List<Task> getCompletedTasks();
 
     // 更新任务的完成日期
-    @Update("UPDATE task SET completeddates = #{completedDates} WHERE id = #{id}")
+    @Update("UPDATE task SET completeddates = #{completedDates}, updateTime = NOW() WHERE id = #{id}")
     void updateCompletedDates(Task task);
 }

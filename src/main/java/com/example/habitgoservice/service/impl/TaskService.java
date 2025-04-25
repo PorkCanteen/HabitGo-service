@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.time.LocalDate;  // 添加这行导入语句
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class TaskService implements ITaskService {
@@ -22,11 +23,15 @@ public class TaskService implements ITaskService {
 
     @Override
     public void addTask(Task task) {
+        LocalDateTime now = LocalDateTime.now();
+        task.setCreateTime(now);
+        task.setUpdateTime(now);
         taskMapper.addTask(task);
     }
 
     @Override
     public void updateTask(Task task) {
+        task.setUpdateTime(LocalDateTime.now());
         taskMapper.updateTask(task);
     }
 

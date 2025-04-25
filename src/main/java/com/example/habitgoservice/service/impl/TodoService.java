@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Service
 public class TodoService implements ITodoService {
@@ -21,11 +22,15 @@ public class TodoService implements ITodoService {
 
     @Override
     public void addTodo(Todo todo) {
+        LocalDateTime now = LocalDateTime.now();
+        todo.setCreateTime(now);
+        todo.setUpdateTime(now);
         todoMapper.addTodo(todo);
     }
 
     @Override
     public void updateTodo(Todo todo) {
+        todo.setUpdateTime(LocalDateTime.now());
         todoMapper.updateTodo(todo);
     }
 

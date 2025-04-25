@@ -12,7 +12,8 @@ public interface TodoMapper {
     List<Todo> listTodo();
 
     // 创建
-    @Insert("insert into todo(id, name, description, finishDate, isFinished, type) values(#{id}, #{name}, #{description}, #{finishDate}, #{isFinished}, #{type})")
+    @Insert("insert into todo(id, name, description, finishDate, isFinished, type, createTime, updateTime) " +
+            "values(#{id}, #{name}, #{description}, #{finishDate}, #{isFinished}, #{type}, #{createTime}, #{updateTime})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void addTodo(Todo todo);
 
@@ -22,7 +23,8 @@ public interface TodoMapper {
             + "description = #{description}, "
             + "finishDate = #{finishDate}, "
             + "isFinished = #{isFinished}, "
-            + "type = #{type} "
+            + "type = #{type}, "
+            + "updateTime = #{updateTime} "
             + "WHERE id = #{id}")
     int updateTodo(Todo todo);
 
@@ -31,6 +33,6 @@ public interface TodoMapper {
     int deleteTodo(@Param("id") int id); // 使用@Param明确参数名
 
     // 切换完成状态
-    @Update("UPDATE todo SET isFinished = NOT isFinished WHERE id = #{id}")
+    @Update("UPDATE todo SET isFinished = NOT isFinished, updateTime = NOW() WHERE id = #{id}")
     int toggleComplete(@Param("id") int id);
 }
