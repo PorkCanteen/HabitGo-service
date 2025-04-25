@@ -4,25 +4,25 @@ import com.example.habitgoservice.entity.Task;
 
 import java.util.List;
 
-public interface
-
-ITaskService {
-    List<Task> listTask();
+public interface ITaskService {
+    List<Task> listTask(int userId);
 
     void addTask(Task task);
 
     void updateTask(Task task);
 
-    void deleteTask(int id);
+    void deleteTask(int id, int userId);
 
     /**
      * 切换任务状态
      * @param id 任务ID
+     * @param userId 用户ID
      */
-    void toggleTaskStatus(int id);
+    void toggleTaskStatus(int id, int userId);
 
     /**
      * 重置所有任务状态
+     * @param userId 用户ID
      */
-    void resetAllTaskStatus();
+    void resetAllTaskStatus(int userId);
 }

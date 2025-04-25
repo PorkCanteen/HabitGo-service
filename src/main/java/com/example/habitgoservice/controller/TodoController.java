@@ -17,8 +17,8 @@ public class TodoController {
 
     // 查询列表
     @GetMapping("/list")
-    public Result listTodo() {
-        return Result.success(todoService.listTodo());
+    public Result listTodo(@RequestParam int userId) {
+        return Result.success(todoService.listTodo(userId));
     }
 
     // 创建待办
@@ -40,15 +40,15 @@ public class TodoController {
 
     // 删除待办
     @DeleteMapping("/{id}")
-    public Result deleteTodo(@PathVariable int id) {
-        todoService.deleteTodo(id);
+    public Result deleteTodo(@PathVariable int id, @RequestParam int userId) {
+        todoService.deleteTodo(id, userId);
         return Result.success("删除成功");
     }
 
     // 完成待办
     @PutMapping("/complete/{id}")
-    public Result completeTodo(@PathVariable int id) {
-        todoService.toggleComplete(id);
+    public Result completeTodo(@PathVariable int id, @RequestParam int userId) {
+        todoService.toggleComplete(id, userId);
         return Result.success("操作成功");
     }
 

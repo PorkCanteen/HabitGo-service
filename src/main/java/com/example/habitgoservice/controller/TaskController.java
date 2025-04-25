@@ -17,8 +17,8 @@ public class TaskController {
 
     // 查询列表
     @GetMapping("/list")
-    public Result listTask() {
-        return Result.success(taskService.listTask());
+    public Result listTask(@RequestParam int userId) {
+        return Result.success(taskService.listTask(userId));
     }
 
     // 创建任务
@@ -40,15 +40,15 @@ public class TaskController {
 
     // 删除任务
     @DeleteMapping("/{id}")
-    public Result deleteTask(@PathVariable int id) {
-        taskService.deleteTask(id);
+    public Result deleteTask(@PathVariable int id, @RequestParam int userId) {
+        taskService.deleteTask(id, userId);
         return Result.success("删除成功");
     }
 
     // 切换任务状态
     @PutMapping("/toggle/{id}")
-    public Result toggleTaskStatus(@PathVariable int id) {
-        taskService.toggleTaskStatus(id);
+    public Result toggleTaskStatus(@PathVariable int id, @RequestParam int userId) {
+        taskService.toggleTaskStatus(id, userId);
         return Result.success("状态切换成功");
     }
 }

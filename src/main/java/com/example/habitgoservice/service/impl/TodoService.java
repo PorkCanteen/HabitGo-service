@@ -16,8 +16,8 @@ public class TodoService implements ITodoService {
     TodoMapper todoMapper;
 
     @Override
-    public List<Todo> listTodo() {
-        return todoMapper.listTodo();
+    public List<Todo> listTodo(int userId) {
+        return todoMapper.listTodo(userId);
     }
 
     @Override
@@ -35,13 +35,13 @@ public class TodoService implements ITodoService {
     }
 
     @Override
-    public void deleteTodo(int id) {
-        todoMapper.deleteTodo(id);
+    public void deleteTodo(int id, int userId) {
+        todoMapper.deleteTodo(id, userId);
     }
 
     @Override
-    public void toggleComplete(int id) {
-        todoMapper.toggleComplete(id);
+    public void toggleComplete(int id, int userId) {
+        todoMapper.toggleComplete(id, userId);
     }
 }
 

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 @Data
 public class Task {
     private int id;
+    private int userId;
     private String name;
     private String description;
     private int count;

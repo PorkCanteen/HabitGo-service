@@ -17,8 +17,8 @@ public class TaskService implements ITaskService {
     TaskMapper taskMapper;
 
     @Override
-    public List<Task> listTask() {
-        return taskMapper.listTask();
+    public List<Task> listTask(int userId) {
+        return taskMapper.listTask(userId);
     }
 
     @Override
@@ -36,22 +36,22 @@ public class TaskService implements ITaskService {
     }
 
     @Override
-    public void deleteTask(int id) {
-        taskMapper.deleteTask(id);
+    public void deleteTask(int id, int userId) {
+        taskMapper.deleteTask(id, userId);
     }
 
     @Override
-    public void toggleTaskStatus(int id) {
-        int result = taskMapper.toggleTaskStatus(id);
+    public void toggleTaskStatus(int id, int userId) {
+        int result = taskMapper.toggleTaskStatus(id, userId);
         if (result == 0) {
             throw new RuntimeException("任务不存在或更新失败");
         }
     }
 
     @Override
-    public void resetAllTaskStatus() {
+    public void resetAllTaskStatus(int userId) {
         // 获取所有已完成的任务
-        List<Task> completedTasks = taskMapper.getCompletedTasks();
+        List<Task> completedTasks = taskMapper.getCompletedTasks(userId);
         
         // 获取当前日期
         LocalDate today = LocalDate.now();
@@ -71,6 +71,6 @@ public class TaskService implements ITaskService {
         }
         
         // 重置所有任务状态
-        taskMapper.resetAllTaskStatus();
+        taskMapper.resetAllTaskStatus(userId);
     }
 }
