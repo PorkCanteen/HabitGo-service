@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface TaskMapper {
     // 查询列表
-    @Select("select * from task where user_id = #{userId}")
+    @Select("select *, user_id as userId from task where user_id = #{userId}")
     List<Task> listTask(@Param("userId") int userId);
 
     // 创建
@@ -47,7 +47,7 @@ public interface TaskMapper {
     int resetAllTaskStatus(@Param("userId") int userId);
 
     // 获取所有已完成的任务
-    @Select("SELECT * FROM task WHERE iscompleted = 1 AND user_id = #{userId}")
+    @Select("SELECT *, user_id as userId FROM task WHERE iscompleted = 1 AND user_id = #{userId}")
     List<Task> getCompletedTasks(@Param("userId") int userId);
 
     // 更新任务的完成日期

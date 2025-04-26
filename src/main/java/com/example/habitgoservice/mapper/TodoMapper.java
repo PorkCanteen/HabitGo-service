@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface TodoMapper {
     // 查询列表
-    @Select("select * from todo where user_id = #{userId} order by isFinished asc")
+    @Select("select *, user_id as userId from todo where user_id = #{userId} order by isFinished asc")
     List<Todo> listTodo(@Param("userId") int userId);
 
     // 创建
