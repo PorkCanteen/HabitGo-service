@@ -23,7 +23,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
         }
         
         // 对于登录请求，直接放行
-        if (request.getRequestURI().contains("/user/login")) {
+        if (request.getRequestURI().contains("/api/user/login")) {
             return true;
         }
 
