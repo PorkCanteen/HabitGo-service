@@ -7,6 +7,7 @@ import com.example.habitgoservice.entity.User;
 import com.example.habitgoservice.exception.ServiceException;
 import com.example.habitgoservice.mapper.UserMapper;
 import com.example.habitgoservice.service.IUserService;
+import com.example.habitgoservice.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class UserService implements IUserService {
 
     @Autowired
     UserMapper userMapper;
+    
+    @Autowired
+    JwtUtils jwtUtils;
 
     @Override
     public List<User> listUsers() {
@@ -35,6 +39,11 @@ public class UserService implements IUserService {
         }
         loginDTO = new LoginDTO();
         BeanUtils.copyProperties(user, loginDTO);
+        
+        // 生成token并设置到loginDTO中
+        String token = jwtUtils.generateToken(user.getId());
+        loginDTO.setToken(token);
+        
         return loginDTO;
     }
 }
