@@ -31,6 +31,15 @@ public class TaskService implements ITaskService {
 
     @Override
     public void updateTask(Task task) {
+        // 先获取当前任务信息，保留count值
+        List<Task> existingTasks = taskMapper.listTask(task.getUserId());
+        for (Task existingTask : existingTasks) {
+            if (existingTask.getId() == task.getId()) {
+                task.setCount(existingTask.getCount());
+                break;
+            }
+        }
+        
         task.setUpdateTime(LocalDateTime.now());
         taskMapper.updateTask(task);
     }

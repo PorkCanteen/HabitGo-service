@@ -21,7 +21,6 @@ public interface TaskMapper {
     @Update("UPDATE task SET "
             + "name = #{name}, "
             + "description = #{description}, "
-            + "count = #{count}, "
             + "isCompleted = #{isCompleted}, "
             + "taskType = #{taskType}, "
             + "targetType = #{targetType}, "
