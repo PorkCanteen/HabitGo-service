@@ -33,6 +33,6 @@ public interface TodoMapper {
     int deleteTodo(@Param("id") int id, @Param("userId") int userId);
 
     // 切换完成状态
-    @Update("UPDATE todo SET isFinished = NOT isFinished, updateTime = NOW() WHERE id = #{id} AND user_id = #{userId}")
+    @Update("UPDATE todo SET isFinished = NOT isFinished WHERE id = #{id} AND user_id = #{userId}")
     int toggleComplete(@Param("id") int id, @Param("userId") int userId);
 }

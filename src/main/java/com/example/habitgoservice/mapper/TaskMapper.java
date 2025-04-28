@@ -35,8 +35,7 @@ public interface TaskMapper {
     // 切换任务状态
     @Update("UPDATE task SET "
             + "isCompleted = CASE WHEN isCompleted = 1 THEN 0 ELSE 1 END, "
-            + "count = CASE WHEN isCompleted = 0 THEN count - 1 ELSE count + 1 END, "
-            + "updateTime = NOW() "
+            + "count = CASE WHEN isCompleted = 0 THEN count - 1 ELSE count + 1 END "
             + "WHERE id = #{id} AND user_id = #{userId}")
     int toggleTaskStatus(@Param("id") int id, @Param("userId") int userId);
 
