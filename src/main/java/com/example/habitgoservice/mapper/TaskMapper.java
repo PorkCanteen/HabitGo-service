@@ -50,4 +50,8 @@ public interface TaskMapper {
     // 更新任务的完成日期
     @Update("UPDATE task SET completeddates = #{completedDates}, updateTime = NOW() WHERE id = #{id} AND user_id = #{userId}")
     void updateCompletedDates(Task task);
+
+    // 查询单个任务
+    @Select("SELECT *, user_id as userId FROM task WHERE id = #{id} AND user_id = #{userId}")
+    Task getTaskById(@Param("id") int id, @Param("userId") int userId);
 }

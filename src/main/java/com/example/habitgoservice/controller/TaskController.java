@@ -1,6 +1,7 @@
 package com.example.habitgoservice.controller;
 
 import com.example.habitgoservice.common.Result;
+import com.example.habitgoservice.controller.dto.TaskDetailDTO;
 import com.example.habitgoservice.entity.Task;
 import com.example.habitgoservice.service.ITaskService;
 import com.example.habitgoservice.utils.RequestUtil;
@@ -21,6 +22,14 @@ public class TaskController {
     public Result listTask() {
         Integer userId = RequestUtil.getCurrentUserId();
         return Result.success(taskService.listTask(userId));
+    }
+
+    // 查询单个任务详情
+    @GetMapping("/{id}")
+    public Result getTaskDetail(@PathVariable int id) {
+        Integer userId = RequestUtil.getCurrentUserId();
+        TaskDetailDTO taskDetail = taskService.getTaskDetail(id, userId);
+        return Result.success(taskDetail);
     }
 
     // 创建任务

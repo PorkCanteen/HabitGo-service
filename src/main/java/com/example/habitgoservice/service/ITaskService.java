@@ -1,5 +1,6 @@
 package com.example.habitgoservice.service;
 
+import com.example.habitgoservice.controller.dto.TaskDetailDTO;
 import com.example.habitgoservice.entity.Task;
 
 import java.util.List;
@@ -25,4 +26,12 @@ public interface ITaskService {
      * @param userId 用户ID
      */
     void resetAllTaskStatus(int userId);
+
+    /**
+     * 获取任务详情
+     * @param id 任务ID
+     * @param userId 用户ID
+     * @return 任务详情DTO
+     */
+    TaskDetailDTO getTaskDetail(int id, int userId);
 }
