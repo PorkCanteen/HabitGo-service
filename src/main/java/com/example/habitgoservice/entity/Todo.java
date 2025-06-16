@@ -2,6 +2,8 @@ package com.example.habitgoservice.entity;
 
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
 
 @Data
 public class Todo {
@@ -14,4 +16,5 @@ public class Todo {
     private int type;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private List<TodoChild> children = new ArrayList<>();
 }

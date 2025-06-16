@@ -2,11 +2,14 @@ package com.example.habitgoservice.controller;
 
 import com.example.habitgoservice.common.Result;
 import com.example.habitgoservice.entity.Todo;
+import com.example.habitgoservice.entity.TodoChild;
 import com.example.habitgoservice.service.ITodoService;
 import com.example.habitgoservice.utils.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -21,6 +24,17 @@ public class TodoController {
     public Result listTodo() {
         Integer userId = RequestUtil.getCurrentUserId();
         return Result.success(todoService.listTodo(userId));
+    }
+
+    // 查询单个todo详情
+    @GetMapping("/{id}")
+    public Result getTodoById(@PathVariable int id) {
+        Integer userId = RequestUtil.getCurrentUserId();
+        Todo todo = todoService.getTodoById(id, userId);
+        if (todo == null) {
+            return Result.error("待办项不存在");
+        }
+        return Result.success(todo);
     }
 
     // 创建待办
@@ -42,6 +56,26 @@ public class TodoController {
         todo.setUserId(userId);
         todoService.updateTodo(todo);
         return Result.success("更新成功");
+    }
+
+    // 编辑children接口
+    @PutMapping("/{id}/children")
+    public Result updateTodoChildren(
+            @PathVariable int id,
+            @RequestBody List<TodoChild> children) {
+        Integer userId = RequestUtil.getCurrentUserId();
+        todoService.updateTodoChildren(id, userId, children);
+        return Result.success("子任务更新成功");
+    }
+
+    // 切换单个child的完成状态
+    @PutMapping("/{todoId}/children/{childId}/toggle")
+    public Result toggleChildComplete(
+            @PathVariable int todoId,
+            @PathVariable long childId) {
+        Integer userId = RequestUtil.getCurrentUserId();
+        todoService.toggleChildComplete(todoId, childId, userId);
+        return Result.success("子任务状态切换成功");
     }
 
     // 删除待办
