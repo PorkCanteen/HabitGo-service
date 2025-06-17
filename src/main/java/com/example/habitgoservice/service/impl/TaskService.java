@@ -68,13 +68,13 @@ public class TaskService implements ITaskService {
         // 获取所有已完成的任务
         List<Task> completedTasks = taskMapper.getCompletedTasks(userId);
         
-        // 获取当前日期
-        LocalDate today = LocalDate.now();
+        // 获取昨天的日期（因为定时任务在0点执行，记录的应该是昨天完成的任务）
+        LocalDate yesterday = LocalDate.now().minusDays(1);
         
         // 为每个已完成的任务更新 completedDates
         for (Task task : completedTasks) {
             String currentDates = task.getCompletedDates();
-            String newDate = today.toString(); // 格式：YYYY-MM-DD
+            String newDate = yesterday.toString(); // 格式：YYYY-MM-DD
             
             // 如果已有完成日期，则追加；否则直接设置
             String updatedDates = (currentDates != null && !currentDates.isEmpty()) 
