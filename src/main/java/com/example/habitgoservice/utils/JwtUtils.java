@@ -16,8 +16,8 @@ public class JwtUtils {
     // 秘钥（应从配置文件中读取，这里简化处理）
     private String secret = "habitgo_jwt_secret_key";
     
-    // token有效期（24小时）
-    private long expiration = 7 *24 * 60 * 60 * 1000;
+    // token有效期（90天）
+    private long expiration = 90 * 24 * 60 * 60 * 1000;
     
     // 从token中提取用户ID
     public Integer extractUserId(String token) {
