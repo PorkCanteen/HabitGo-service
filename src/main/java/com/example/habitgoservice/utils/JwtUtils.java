@@ -37,7 +37,7 @@ public class JwtUtils {
     
     // 解析token获取所有声明
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(secret).build().parseClaimsJws(token).getBody();
     }
     
     // 检查token是否过期
