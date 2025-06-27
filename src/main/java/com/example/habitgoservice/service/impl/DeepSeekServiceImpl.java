@@ -6,6 +6,7 @@ import com.example.habitgoservice.dto.deepseek.DeepSeekChatResponse;
 import com.example.habitgoservice.dto.deepseek.DeepSeekMessage;
 import com.example.habitgoservice.service.DeepSeekService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,15 +24,18 @@ public class DeepSeekServiceImpl implements DeepSeekService {
     private final RestTemplate restTemplate;
     private final HttpHeaders headers;
     
-    // DeepSeek API 配置
-    private static final String API_BASE_URL = "https://api.deepseek.com";
-    private static final String API_KEY = "sk-177d3c8e5387495d90e921ffa503a8a0";
+    // 从配置文件注入
+    @Value("${deepseek.api.base-url}")
+    private String apiBaseUrl;
     
-    public DeepSeekServiceImpl() {
+    @Value("${deepseek.api.key}")
+    private String apiKey;
+    
+    public DeepSeekServiceImpl(@Value("${deepseek.api.key}") String apiKey) {
         this.restTemplate = new RestTemplate();
         this.headers = new HttpHeaders();
         this.headers.setContentType(MediaType.APPLICATION_JSON);
-        this.headers.setBearerAuth(API_KEY);
+        this.headers.setBearerAuth(apiKey);
     }
     
     @Override
@@ -51,7 +55,7 @@ public class DeepSeekServiceImpl implements DeepSeekService {
             
             // 调用API
             ResponseEntity<DeepSeekChatResponse> responseEntity = restTemplate.exchange(
-                API_BASE_URL + "/chat/completions",
+                apiBaseUrl + "/chat/completions",
                 HttpMethod.POST,
                 entity,
                 DeepSeekChatResponse.class

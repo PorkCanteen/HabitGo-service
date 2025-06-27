@@ -6,3 +6,9 @@ spring:
     url: jdbc:mysql://localhost:3306/habit-go?serverTimezone=GMT%2b8 # ????
     username: root
     password: 553295cmq
+
+# DeepSeek API 配置
+deepseek:
+  api:
+    base-url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com}
+    key: ${DEEPSEEK_API_KEY:your-api-key-here}

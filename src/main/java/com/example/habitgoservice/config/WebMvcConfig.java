@@ -23,7 +23,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         // 指定controller统一的接口前缀
         configurer.addPathPrefix("/api", clazz -> clazz.isAnnotationPresent(RestController.class));
     }
-    
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtAuthInterceptor)
